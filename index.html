@@ -1,1 +1,698 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff5f7">
+  <meta name="description" content="Your personalized beauty, fashion, and lifestyle glow-up starts here.">
+  <title>Glow Up AI | Your Glow-Up Starts Here</title>
+
+  <style>
+    :root {
+      --pink: #e8a7b8;
+      --pink-dark: #bd718a;
+      --pink-light: #fff1f5;
+      --cream: #fffaf5;
+      --gold: #c4a36b;
+      --sage: #a9b6a0;
+      --text: #40343a;
+      --muted: #877981;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    button, input, select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      padding: 18px 7%;
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid #f4e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-family: Georgia, serif;
+      font-size: 23px;
+      font-weight: bold;
+      color: var(--pink-dark);
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--gold);
+    }
+
+    nav {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+
+    nav button {
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .hero {
+      min-height: 570px;
+      padding: 75px 7%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at 15% 20%, #f9dce5 0%, transparent 45%),
+        radial-gradient(ellipse at 85% 80%, #eee3d5 0%, transparent 40%),
+        linear-gradient(135deg, #fff7f8, #fffaf5);
+    }
+
+    .hero-content {
+      max-width: 720px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--pink-dark);
+      background: white;
+      padding: 8px 17px;
+      border-radius: 30px;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+      border: 1px solid #f3dce4;
+    }
+
+    h1, h2, h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 500;
+    }
+
+    h1 {
+      font-size: clamp(43px, 8vw, 76px);
+      line-height: 1.08;
+      margin-bottom: 22px;
+    }
+
+    h1 em {
+      color: var(--pink-dark);
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 530px;
+      margin: 0 auto 30px;
+      font-size: 17px;
+    }
+
+    .primary-btn {
+      background: var(--pink-dark);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 15px 27px;
+      box-shadow: 0 7px 20px #bd718a30;
+      transition: transform 0.2s;
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .secondary-btn {
+      background: white;
+      color: var(--pink-dark);
+      border: 1px solid #e8c2ce;
+      border-radius: 30px;
+      padding: 13px 23px;
+    }
+
+    .section {
+      padding: 65px 7%;
+      text-align: center;
+    }
+
+    .section h2 {
+      font-size: clamp(30px, 5vw, 43px);
+      margin-bottom: 12px;
+    }
+
+    .section-intro {
+      max-width: 570px;
+      margin: 0 auto 35px;
+      color: var(--muted);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 35px auto 0;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #f0e4e7;
+      border-radius: 22px;
+      padding: 27px 22px;
+      text-align: left;
+      box-shadow: 0 8px 25px #53343d08;
+    }
+
+    .card-icon {
+      font-size: 28px;
+      margin-bottom: 13px;
+    }
+
+    .card h3 {
+      font-size: 22px;
+      margin-bottom: 9px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .pink-section {
+      background: var(--pink-light);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    #quiz, #plan {
+      max-width: 650px;
+      margin: 35px auto;
+      padding: 30px;
+      background: white;
+      border: 1px solid #f0dfe5;
+      border-radius: 25px;
+      text-align: left;
+      box-shadow: 0 10px 35px #6e3b4b0a;
+    }
+
+    .progress-track {
+      height: 6px;
+      background: #f5e7eb;
+      border-radius: 10px;
+      margin: 18px 0 28px;
+      overflow: hidden;
+    }
+
+    #progress {
+      height: 100%;
+      width: 0;
+      background: var(--pink-dark);
+      transition: width 0.25s;
+    }
+
+    .question-number {
+      color: var(--pink-dark);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    #question-title {
+      font-size: 27px;
+      margin: 10px 0 20px;
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+    }
+
+    .option {
+      text-align: left;
+      padding: 13px 15px;
+      background: #fffafb;
+      border: 1px solid #efdee4;
+      border-radius: 13px;
+      color: var(--text);
+    }
+
+    .option.selected {
+      border-color: var(--pink-dark);
+      background: var(--pink-light);
+    }
+
+    .quiz-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .quiz-actions button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .plan-block {
+      padding: 18px 0;
+      border-bottom: 1px solid #f1e4e8;
+    }
+
+    .plan-block:last-child {
+      border-bottom: none;
+    }
+
+    .plan-block h3 {
+      margin-bottom: 7px;
+    }
+
+    .plan-block p, .plan-block li {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .plan-block ul {
+      padding-left: 20px;
+    }
+
+    .note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 20px;
+    }
+
+    .feature-link {
+      display: inline-block;
+      margin-top: 18px;
+      color: var(--pink-dark);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    footer {
+      background: #493b42;
+      color: #fff5f7;
+      padding: 35px 7%;
+      text-align: center;
+    }
+
+    footer p {
+      color: #e4d6dc;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    footer .logo {
+      color: #f5cbd8;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 15px 5%;
+      }
+
+      .logo {
+        font-size: 19px;
+      }
+
+      nav {
+        gap: 10px;
+      }
+
+      nav button {
+        font-size: 12px;
+      }
+
+      .hero {
+        min-height: 510px;
+        padding: 60px 6%;
+      }
+
+      .section {
+        padding: 50px 6%;
+      }
+
+      #quiz, #plan {
+        padding: 22px 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">Glow Up <span>AI</span> ✧</div>
+    <nav aria-label="Main navigation">
+      <button onclick="showHome()">Home</button>
+      <button onclick="startQuiz()">My Glow-Up</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <span class="eyebrow">Your personal glow-up journey</span>
+        <h1>Your Glow-Up.<br><em>Your Rules.</em></h1>
+        <p>
+          A little more confidence. A little more self-care.
+          A routine that feels like you. Let's create your next chapter.
+        </p>
+        <button class="primary-btn" onclick="startQuiz()">
+          Create My Glow-Up ✨
+        </button>
+        <br>
+        <a href="#discover" class="feature-link">Discover your possibilities ↓</a>
+      </div>
+    </section>
+
+    <section class="section" id="discover">
+      <span class="eyebrow">Made for your lifestyle</span>
+      <h2>Your glow-up, your way.</h2>
+      <p class="section-intro">
+        Build little habits, explore your style, and create a self-care
+        routine that works with your goals, budget, and schedule.
+      </p>
+
+      <div class="cards">
+        <article class="card">
+          <div class="card-icon">🌷</div>
+          <h3>Skin & Beauty</h3>
+          <p>Explore simple skincare, makeup inspiration, and beauty routines.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">👗</div>
+          <h3>Your Personal Style</h3>
+          <p>Discover outfit ideas that match your aesthetic and budget.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">🕯️</div>
+          <h3>Daily Rituals</h3>
+          <p>Create realistic habits for confidence, wellness, and self-care.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">✨</div>
+          <h3>Your Progress</h3>
+          <p>Celebrate small wins and build a routine you can actually maintain.</p>
+        </article>
+      </div>
+
+      <button class="primary-btn" style="margin-top:35px" onclick="startQuiz()">
+        Find My Glow-Up
+      </button>
+    </section>
+
+    <section class="section pink-section" id="journey">
+      <span class="eyebrow">Your journey begins here</span>
+      <h2>Let's get to know you.</h2>
+      <p class="section-intro">
+        Answer a few questions so we can create a starter plan
+        inspired by your goals and preferences.
+      </p>
+
+      <div id="quiz" class="hidden">
+        <div class="question-number" id="question-number">Question 1 of 6</div>
+        <div class="progress-track">
+          <div id="progress"></div>
+        </div>
+
+        <h2 id="question-title"></h2>
+        <div class="options" id="options"></div>
+
+        <div class="quiz-actions">
+          <button class="secondary-btn" id="back-btn" onclick="previousQuestion()">
+            Back
+          </button>
+          <button class="primary-btn" id="next-btn" onclick="nextQuestion()" disabled>
+            Continue →
+          </button>
+        </div>
+      </div>
+
+      <div id="quiz-start">
+        <button class="primary-btn" onclick="startQuiz()">Start My Quiz 💗</button>
+      </div>
+
+      <div id="plan" class="hidden">
+        <span class="eyebrow">Your starter plan</span>
+        <h2 id="plan-title">Your Glow-Up Plan</h2>
+        <div id="plan-content"></div>
+        <button class="primary-btn" onclick="startQuiz()">Retake My Quiz</button>
+        <p class="note">
+          This is a starter plan based on your answers, not medical advice
+          or an AI-generated diagnosis. Your answers currently stay in this
+          browser session and are not saved to an account.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <span class="eyebrow">A gentle reminder</span>
+      <h2>You don't need to become someone else.</h2>
+      <p class="section-intro">
+        Your glow-up isn't about perfection. It's about finding routines,
+        styles, and little moments that help you feel good being yourself.
+      </p>
+      <button class="secondary-btn" onclick="startQuiz()">Start Your Journey ♡</button>
+    </section>
+  </main>
+
+  <footer>
+    <div class="logo">Glow Up <span>AI</span> ✧</div>
+    <p>Your journey. Your pace. Your glow.</p>
+    <p>© <span id="year"></span> Glow Up AI · Made with love ♡</p>
+  </footer>
+
+  <script>
+    const questions = [
+      {
+        title: "What would you love to focus on?",
+        options: [
+          "Skincare & healthy-looking skin",
+          "Makeup & beauty",
+          "Haircare",
+          "Fashion & personal style",
+          "A complete glow-up"
+        ]
+      },
+      {
+        title: "What's your biggest goal right now?",
+        options: [
+          "Build a simple daily routine",
+          "Feel more confident",
+          "Explore a new aesthetic",
+          "Create healthier habits",
+          "Find products that suit me"
+        ]
+      },
+      {
+        title: "What's your skin type?",
+        options: [
+          "Dry",
+          "Oily",
+          "Combination",
+          "Normal",
+          "Sensitive",
+          "I'm not sure",
+          "Skip this question"
+        ]
+      },
+      {
+        title: "What's your beauty budget?",
+        options: [
+          "Under $15",
+          "$15–$30",
+          "$31–$60",
+          "$61 or more",
+          "I'd prefer affordable options"
+        ]
+      },
+      {
+        title: "Which aesthetic feels most like you?",
+        options: [
+          "Clean girl",
+          "Old money",
+          "Coquette",
+          "Y2K",
+          "Casual chic",
+          "Sporty & comfy",
+          "Luxury glam",
+          "I'm still discovering my style"
+        ]
+      },
+      {
+        title: "How much time can you spend each day?",
+        options: [
+          "5 minutes",
+          "10 minutes",
+          "15 minutes",
+          "30 minutes or more"
+        ]
+      }
+    ];
+
+    let currentQuestion = 0;
+    let answers = Array(questions.length).fill(null);
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function showHome() {
+      document.getElementById("home").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function startQuiz() {
+      document.getElementById("quiz-start").classList.add("hidden");
+      document.getElementById("plan").classList.add("hidden");
+      document.getElementById("quiz").classList.remove("hidden");
+
+      currentQuestion = 0;
+      answers = Array(questions.length).fill(null);
+      renderQuestion();
+
+      document.getElementById("journey").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function renderQuestion() {
+      const question = questions[currentQuestion];
+
+      document.getElementById("question-number").textContent =
+        `Question ${currentQuestion + 1} of ${questions.length}`;
+
+      document.getElementById("question-title").textContent = question.title;
+      document.getElementById("progress").style.width =
+        `${(currentQuestion / questions.length) * 100}%`;
+
+      const optionsContainer = document.getElementById("options");
+      optionsContainer.replaceChildren();
+
+      question.options.forEach(option => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "option";
+        button.textContent = option;
+
+        if (answers[currentQuestion] === option) {
+          button.classList.add("selected");
+        }
+
+        button.addEventListener("click", () => {
+          answers[currentQuestion] = option;
+          renderQuestion();
+        });
+
+        optionsContainer.appendChild(button);
+      });
+
+      document.getElementById("back-btn").disabled = currentQuestion === 0;
+
+      const nextButton = document.getElementById("next-btn");
+      nextButton.disabled = !answers[currentQuestion];
+      nextButton.textContent =
+        currentQuestion === questions.length - 1 ? "Create My Plan ✨" : "Continue →";
+    }
+
+    function previousQuestion() {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        renderQuestion();
+      }
+    }
+
+    function nextQuestion() {
+      if (!answers[currentQuestion]) return;
+
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        renderQuestion();
+      } else {
+        createPlan();
+      }
+    }
+
+    function createPlan() {
+      document.getElementById("quiz").classList.add("hidden");
+      document.getElementById("plan").classList.remove("hidden");
+
+      const [focus, goal, skin, budget, style, time] = answers;
+      document.getElementById("plan-title").textContent = "Your Glow-Up Starts Here ✨";
+
+      const content = document.getElementById("plan-content");
+      content.replaceChildren();
+
+      const sections = [
+        {
+          title: "♡ Your focus",
+          text: `You chose ${focus.toLowerCase()}. Start small and build a routine you enjoy.`
+        },
+        {
+          title: "🌷 Your daily ritual",
+          text: `${time} a day is your starting point. Choose one small action for the morning and one for the evening.`
+        },
+        {
+          title: "🫧 Your skin & beauty",
+          text: skin === "Skip this question" || skin === "I'm not sure"
+            ? "Start with gentle basics and notice how your skin responds. You don't need a complicated routine."
+            : `You selected ${skin.toLowerCase()} skin. Choose gentle products designed for your needs, and introduce new products one at a time.`
+        },
+        {
+          title: "👗 Your signature style",
+          text: `Explore ${style.toLowerCase()} inspiration. Save outfits you love and try combining pieces you already own.`
+        },
+        {
+          title: "🛍️ Your budget",
+          text: `Your budget preference: ${budget}. Start with essentials and compare prices before buying anything.`
+        },
+        {
+          title: "✨ Your next step",
+          text: `Your goal is to ${goal.toLowerCase()}. Pick one achievable habit this week, and celebrate your progress instead of chasing perfection.`
+        }
+      ];
+
+      sections.forEach(section => {
+        const block = document.createElement("div");
+        block.className = "plan-block";
+
+        const heading = document.createElement("h3");
+        heading.textContent = section.title;
+
+        const paragraph = document.createElement("p");
+        paragraph.textContent = section.text;
+
+        block.append(heading, paragraph);
+        content.appendChild(block);
+      });
+
+      document.getElementById("progress").style.width = "100%";
+      document.getElementById("plan").scrollIntoView({ behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>
