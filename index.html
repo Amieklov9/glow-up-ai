@@ -1,1 +1,1713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fff7f8">
+<meta name="description" content="Your personal beauty, fashion and lifestyle glow-up experience.">
+<title>Glow Up AI | Your Personal Glow-Up</title>
 
+<style>
+:root {
+  --pink:#d88da5;
+  --pink-dark:#a95573;
+  --pink-pale:#fff0f4;
+  --cream:#fffaf6;
+  --gold:#bd9a61;
+  --sage:#a6b6a0;
+  --ink:#44353d;
+  --muted:#8c7c84;
+  --white:#fff;
+  --border:#f0e1e6;
+  --shadow:0 10px 35px #68404b0c;
+}
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--ink);
+  background:var(--cream);
+  line-height:1.55;
+}
+
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{
+  outline:3px solid #d88da566;
+  outline-offset:2px;
+}
+
+button:disabled{opacity:.45;cursor:not-allowed}
+
+button.primary,.primary{
+  background:var(--pink-dark);
+  color:white;
+  border:0;
+  border-radius:25px;
+  padding:12px 19px;
+}
+
+button.secondary,.secondary{
+  background:white;
+  color:var(--pink-dark);
+  border:1px solid #e9cad4;
+  border-radius:25px;
+  padding:11px 17px;
+}
+
+button.soft{
+  border:1px solid var(--border);
+  background:var(--pink-pale);
+  color:var(--pink-dark);
+  border-radius:14px;
+  padding:10px 14px;
+}
+
+button:hover{filter:brightness(.98)}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:#fffaf6f2;
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  padding:13px 5%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.logo{
+  font-family:Georgia,serif;
+  font-size:22px;
+  color:var(--pink-dark);
+  font-weight:bold;
+  white-space:nowrap;
+}
+
+.logo span{color:var(--gold)}
+
+.top-actions{display:flex;gap:8px;align-items:center}
+
+.top-actions button{
+  border:1px solid var(--border);
+  background:white;
+  color:var(--ink);
+  padding:8px 12px;
+  border-radius:20px;
+  font-size:13px;
+}
+
+.layout{
+  display:grid;
+  grid-template-columns:215px minmax(0,1fr);
+  min-height:calc(100vh - 60px);
+}
+
+.sidebar{
+  padding:25px 13px;
+  background:#fffdfb;
+  border-right:1px solid var(--border);
+}
+
+.side-label{
+  padding:8px 12px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:1.4px;
+  font-size:10px;
+}
+
+.nav-btn{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  width:100%;
+  padding:12px;
+  margin:3px 0;
+  border:0;
+  background:transparent;
+  border-radius:13px;
+  color:#74636b;
+  text-align:left;
+  font-size:13px;
+}
+
+.nav-btn.active{
+  background:var(--pink-pale);
+  color:var(--pink-dark);
+  font-weight:650;
+}
+
+.sidebar-note{
+  margin:28px 6px 0;
+  background:#f7f3eb;
+  border-radius:17px;
+  padding:15px;
+  font-size:12px;
+  color:#7f706c;
+}
+
+main{min-width:0;padding:28px 5% 70px}
+
+.page{display:none;max-width:1100px;margin:0 auto}
+.page.active{display:block}
+
+.eyebrow{
+  text-transform:uppercase;
+  letter-spacing:1.8px;
+  font-size:10px;
+  color:var(--pink-dark);
+  font-weight:700;
+}
+
+h1,h2,h3{
+  font-family:Georgia,"Times New Roman",serif;
+  font-weight:500;
+  line-height:1.2;
+}
+
+h1{font-size:clamp(30px,5vw,47px);margin:10px 0}
+h2{font-size:clamp(25px,4vw,34px);margin:8px 0 12px}
+h3{font-size:21px;margin:5px 0 10px}
+
+p{margin:8px 0}
+.muted{color:var(--muted);font-size:14px}
+.small{font-size:12px;color:var(--muted)}
+.spaced{margin-top:24px}
+
+.hero{
+  padding:35px;
+  border:1px solid #f0dbe3;
+  border-radius:26px;
+  background:
+    radial-gradient(ellipse at 90% 15%,#f3d8c8 0,transparent 40%),
+    linear-gradient(130deg,#fff0f4,#fffaf5 65%,#f4f0e7);
+  position:relative;
+  overflow:hidden;
+}
+
+.hero p{max-width:540px;color:#786971}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+
+.hero-decoration{
+  position:absolute;
+  right:24px;
+  top:15px;
+  font-size:85px;
+  opacity:.18;
+  pointer-events:none;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+  margin-top:20px;
+}
+
+.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+.card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:20px;
+  box-shadow:var(--shadow);
+  min-width:0;
+}
+
+.card p{font-size:13px;color:var(--muted)}
+.card-icon{font-size:27px;margin-bottom:9px}
+.card-title-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+
+.stat{
+  font-family:Georgia,serif;
+  font-size:29px;
+  color:var(--pink-dark);
+  margin:5px 0;
+}
+
+.badge{
+  display:inline-block;
+  background:var(--pink-pale);
+  color:var(--pink-dark);
+  border-radius:30px;
+  padding:5px 10px;
+  font-size:11px;
+}
+
+.progress-track{
+  background:#f5e8ed;
+  height:8px;
+  border-radius:20px;
+  overflow:hidden;
+  margin:12px 0;
+}
+
+.progress-fill{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#d88da5,#bd9a61);
+  border-radius:20px;
+  transition:width .3s;
+}
+
+.task{
+  display:flex;
+  align-items:flex-start;
+  gap:11px;
+  padding:13px 0;
+  border-bottom:1px solid #f5e9ed;
+}
+
+.task:last-child{border-bottom:0}
+
+.task input{
+  width:18px;
+  height:18px;
+  accent-color:var(--pink-dark);
+  margin-top:3px;
+}
+
+.task label{flex:1;font-size:14px}
+.task.done label{text-decoration:line-through;color:var(--muted)}
+
+.list{list-style:none;padding:0;margin:10px 0}
+.list li{padding:10px 0;border-bottom:1px solid var(--border);font-size:14px}
+.list li:last-child{border:0}
+
+.chip-row{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+
+.chip{
+  border:1px solid var(--border);
+  background:white;
+  color:var(--ink);
+  border-radius:30px;
+  padding:8px 12px;
+  font-size:12px;
+}
+
+.chip.selected{
+  background:var(--pink-pale);
+  border-color:var(--pink);
+  color:var(--pink-dark);
+}
+
+.form-field{margin:15px 0}
+.form-field label{
+  display:block;
+  font-size:13px;
+  font-weight:600;
+  margin-bottom:7px;
+}
+
+.form-field input,.form-field textarea,.form-field select{
+  width:100%;
+  border:1px solid var(--border);
+  background:#fffdfd;
+  border-radius:12px;
+  padding:12px;
+  color:var(--ink);
+}
+
+.form-field textarea{min-height:110px;resize:vertical}
+
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.row>*{min-width:0}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+}
+
+.option-list{display:grid;gap:10px;margin:18px 0}
+.option-btn{
+  text-align:left;
+  padding:13px 15px;
+  border-radius:13px;
+  border:1px solid var(--border);
+  background:#fffdfd;
+  color:var(--ink);
+}
+.option-btn.selected{
+  background:var(--pink-pale);
+  border-color:var(--pink);
+}
+
+.quiz-card{
+  max-width:690px;
+  margin:20px auto;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:23px;
+  padding:25px;
+}
+
+.quiz-actions{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:22px;
+}
+
+.hidden{display:none!important}
+
+.routine-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}
+
+.outfit{
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:17px;
+  background:linear-gradient(140deg,#fff7f8,#fff);
+}
+
+.outfit-emoji{font-size:37px}
+.outfit h3{font-size:20px}
+
+.product{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.product .product-icon{
+  background:linear-gradient(140deg,#fff0f4,#f5eee5);
+  border-radius:15px;
+  display:grid;
+  place-items:center;
+  min-height:95px;
+  font-size:36px;
+}
+
+.product .price{color:var(--pink-dark);font-weight:700;font-size:14px}
+
+.chat-window{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:16px;
+}
+
+.chat-messages{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  min-height:190px;
+  max-height:390px;
+  overflow-y:auto;
+  padding:8px 0 18px;
+}
+
+.bubble{
+  padding:12px 14px;
+  border-radius:16px;
+  max-width:88%;
+  font-size:13px;
+  white-space:pre-wrap;
+}
+
+.bubble.bot{background:var(--pink-pale);align-self:flex-start}
+.bubble.user{background:#f2eee7;align-self:flex-end}
+
+.chat-form{display:flex;gap:8px}
+.chat-form input{
+  flex:1;
+  min-width:0;
+  border:1px solid var(--border);
+  border-radius:25px;
+  padding:12px;
+}
+
+.journal-entry{
+  padding:15px 0;
+  border-bottom:1px solid var(--border);
+}
+.journal-entry:last-child{border:0}
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  padding:25px 12px;
+  font-size:12px;
+}
+
+.toast{
+  position:fixed;
+  bottom:22px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#49353e;
+  color:white;
+  border-radius:30px;
+  padding:12px 20px;
+  font-size:13px;
+  z-index:50;
+  box-shadow:var(--shadow);
+  max-width:90%;
+  text-align:center;
+}
+
+.empty{
+  text-align:center;
+  padding:30px 15px;
+  color:var(--muted);
+}
+
+@media(max-width:800px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{
+    position:sticky;
+    top:58px;
+    z-index:15;
+    padding:7px 5px;
+    border-right:0;
+    border-bottom:1px solid var(--border);
+    overflow-x:auto;
+    display:flex;
+    gap:4px;
+    background:#fffaf6f7;
+  }
+  .side-label,.sidebar-note{display:none}
+  .nav-btn{
+    width:auto;
+    min-width:max-content;
+    padding:10px 12px;
+    font-size:12px;
+    margin:0;
+    justify-content:center;
+  }
+  main{padding:22px 5% 55px}
+  .grid.four{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid.three{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media(max-width:480px){
+  .logo{font-size:19px}
+  .topbar{padding:11px 4%}
+  .top-actions button{font-size:11px;padding:7px 9px}
+  main{padding:17px 4% 45px}
+  .hero{padding:25px 21px}
+  .hero-decoration{font-size:56px;right:12px}
+  .grid,.grid.three,.grid.four{grid-template-columns:1fr}
+  .card{padding:17px}
+  .quiz-card{padding:19px}
+  .stat{font-size:25px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="logo">Glow Up <span>AI</span> ✧</div>
+  <div class="top-actions">
+    <button onclick="navigate('profile')">♡ My Profile</button>
+    <button onclick="navigate('quiz')">Edit Quiz</button>
+  </div>
+</header>
+
+<div class="layout">
+
+<aside class="sidebar">
+  <div class="side-label">Your beauty world</div>
+
+  <button class="nav-btn active" data-page="home" onclick="navigate('home')">🏠 Home</button>
+  <button class="nav-btn" data-page="plan" onclick="navigate('plan')">✨ My Glow-Up</button>
+  <button class="nav-btn" data-page="beauty" onclick="navigate('beauty')">🫧 Beauty Studio</button>
+  <button class="nav-btn" data-page="style" onclick="navigate('style')">👗 Style Studio</button>
+  <button class="nav-btn" data-page="bestie" onclick="navigate('bestie')">💕 Beauty Bestie</button>
+  <button class="nav-btn" data-page="progress" onclick="navigate('progress')">📈 My Progress</button>
+  <button class="nav-btn" data-page="challenges" onclick="navigate('challenges')">🏆 Challenges</button>
+  <button class="nav-btn" data-page="boutique" onclick="navigate('boutique')">🛍️ Beauty Boutique</button>
+  <button class="nav-btn" data-page="journal" onclick="navigate('journal')">📓 My Journal</button>
+  <button class="nav-btn" data-page="profile" onclick="navigate('profile')">👤 My Profile</button>
+
+  <div class="sidebar-note">
+    <strong>A little reminder ♡</strong>
+    <p>You don't need to become someone else. Your glow-up is about caring for the person you already are.</p>
+  </div>
+</aside>
+
+<main>
+
+<!-- HOME -->
+<section class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-decoration">✧</div>
+    <span class="eyebrow">Your personal glow-up space</span>
+    <h1 id="welcome-title">Welcome to your glow-up. ♡</h1>
+    <p id="welcome-description">Your beauty, your style, your goals. Create little routines that help you feel confident and make this space your own.</p>
+    <div class="hero-actions">
+      <button class="primary" onclick="navigate('plan')">Explore My Glow-Up ✨</button>
+      <button class="secondary" onclick="navigate('quiz')">Personalize My Plan</button>
+    </div>
+  </div>
+
+  <div class="grid four">
+    <div class="card">
+      <div class="card-icon">🌷</div>
+      <div class="small">Today's progress</div>
+      <div class="stat" id="home-progress">0%</div>
+      <div class="progress-track"><div class="progress-fill" id="home-progress-bar"></div></div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🪞</div>
+      <div class="small">Tasks completed</div>
+      <div class="stat" id="home-tasks">0</div>
+      <p>Your little wins count.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">👗</div>
+      <div class="small">Saved wardrobe pieces</div>
+      <div class="stat" id="home-wardrobe">0</div>
+      <p>Your style, your way.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">♡</div>
+      <div class="small">Beauty favorites</div>
+      <div class="stat" id="home-favorites">0</div>
+      <p>Keep your must-haves close.</p>
+    </div>
+  </div>
+
+  <div class="section-head spaced">
+    <div>
+      <span class="eyebrow">Your everyday ritual</span>
+      <h2>Today's little goals</h2>
+      <p class="muted">Small steps. Real progress. No pressure.</p>
+    </div>
+    <button class="secondary" onclick="navigate('progress')">View Progress →</button>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="card-title-row">
+        <h3>Your checklist</h3>
+        <span class="badge" id="task-count">0 of 4</span>
+      </div>
+      <div id="home-task-list"></div>
+    </div>
+
+    <div class="card">
+      <span class="eyebrow">Today's reminder</span>
+      <h3 id="daily-quote">You are allowed to grow at your own pace. ♡</h3>
+      <p>Choose consistency over perfection. Your routines should support you, not overwhelm you.</p>
+      <button class="soft spaced" onclick="navigate('journal')">Write in my journal ✎</button>
+    </div>
+  </div>
+
+  <div class="section-head spaced">
+    <div>
+      <span class="eyebrow">Your personal beauty world</span>
+      <h2>What would you like to do?</h2>
+    </div>
+  </div>
+
+  <div class="grid three">
+    <div class="card">
+      <div class="card-icon">🫧</div>
+      <h3>Beauty Studio</h3>
+      <p>Build your morning and evening rituals.</p>
+      <button class="secondary spaced" onclick="navigate('beauty')">Open Studio →</button>
+    </div>
+    <div class="card">
+      <div class="card-icon">👗</div>
+      <h3>Style Studio</h3>
+      <p>Explore aesthetics and save outfit ideas.</p>
+      <button class="secondary spaced" onclick="navigate('style')">Explore Style →</button>
+    </div>
+    <div class="card">
+      <div class="card-icon">💕</div>
+      <h3>Beauty Bestie</h3>
+      <p>Explore beauty tips and self-care ideas.</p>
+      <button class="secondary spaced" onclick="navigate('bestie')">Chat with Bestie →</button>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section class="page" id="page-quiz">
+  <span class="eyebrow">Let's make this yours</span>
+  <h1>Your personalized glow-up quiz 🎀</h1>
+  <p class="muted">Tell us about your preferences to create a starter plan. You can change your answers whenever you want.</p>
+
+  <div class="quiz-card" id="quiz-card">
+    <div class="small" id="quiz-count">Question 1 of 7</div>
+    <div class="progress-track"><div class="progress-fill" id="quiz-progress"></div></div>
+    <h2 id="quiz-question">What would you like to focus on?</h2>
+    <div class="option-list" id="quiz-options"></div>
+    <div class="quiz-actions">
+      <button class="secondary" id="quiz-back" onclick="quizBack()">← Back</button>
+      <button class="primary" id="quiz-next" onclick="quizNext()" disabled>Continue →</button>
+    </div>
+  </div>
+</section>
+
+<!-- PLAN -->
+<section class="page" id="page-plan">
+  <span class="eyebrow">Your personal roadmap</span>
+  <h1>My Glow-Up ✨</h1>
+  <p class="muted">Your starter roadmap, built around your preferences. Change it whenever life changes.</p>
+
+  <div class="grid">
+    <div class="card">
+      <span class="eyebrow">Your current focus</span>
+      <h2 id="plan-focus">Discovering your style</h2>
+      <p id="plan-summary">Build your glow-up one small step at a time.</p>
+      <button class="primary spaced" onclick="navigate('quiz')">Update My Preferences</button>
+    </div>
+    <div class="card">
+      <span class="eyebrow">Your chosen aesthetic</span>
+      <h2 id="plan-aesthetic">Your signature style ♡</h2>
+      <p id="plan-budget">Recommendations can be adapted to your budget.</p>
+      <button class="secondary spaced" onclick="navigate('style')">Explore My Style</button>
+    </div>
+  </div>
+
+  <div class="section-head spaced">
+    <div><span class="eyebrow">Your daily routine</span><h2>Your roadmap</h2></div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>☀️ Morning</h3>
+      <ul class="list" id="plan-morning"></ul>
+    </div>
+    <div class="card">
+      <h3>🌙 Evening</h3>
+      <ul class="list" id="plan-evening"></ul>
+    </div>
+  </div>
+
+  <div class="card spaced">
+    <h3>🎯 Your weekly focus</h3>
+    <p id="plan-weekly">Pick one realistic habit to practice this week.</p>
+    <button class="secondary spaced" onclick="navigate('challenges')">Explore Challenges →</button>
+  </div>
+</section>
+
+<!-- BEAUTY -->
+<section class="page" id="page-beauty">
+  <span class="eyebrow">Your self-care space</span>
+  <h1>Beauty Studio 🫧</h1>
+  <p class="muted">Organize your routines, keep track of products, and build a beauty ritual that feels good.</p>
+
+  <div class="routine-tabs">
+    <button class="chip selected" id="tab-morning" onclick="setRoutine('morning')">☀️ Morning routine</button>
+    <button class="chip" id="tab-evening" onclick="setRoutine('evening')">🌙 Evening routine</button>
+    <button class="chip" id="tab-hair" onclick="setRoutine('hair')">🎀 Haircare</button>
+    <button class="chip" id="tab-body" onclick="setRoutine('body')">🧴 Body care</button>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3 id="routine-title">☀️ My morning routine</h3>
+      <p id="routine-description">A gentle start to your day.</p>
+      <div id="routine-items"></div>
+      <div class="row spaced">
+        <input id="new-routine-item" aria-label="New routine step" placeholder="Add your own step..." style="flex:1;min-width:130px;border:1px solid var(--border);border-radius:20px;padding:11px">
+        <button class="primary" onclick="addRoutineItem()">Add</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="eyebrow">Your beauty shelf</span>
+      <h3>Products I already own</h3>
+      <p>Keep a list of your products so you can organize what you use.</p>
+      <div class="form-field">
+        <label for="product-name">Product name</label>
+        <input id="product-name" placeholder="e.g. gentle cleanser">
+      </div>
+      <div class="form-field">
+        <label for="product-category">Category</label>
+        <select id="product-category">
+          <option>Skincare</option><option>Makeup</option><option>Haircare</option><option>Body care</option><option>Other</option>
+        </select>
+      </div>
+      <button class="primary" onclick="addOwnedProduct()">Save Product</button>
+      <ul class="list" id="owned-products"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- STYLE -->
+<section class="page" id="page-style">
+  <span class="eyebrow">Find your signature look</span>
+  <h1>Style Studio 👗</h1>
+  <p class="muted">Explore outfit inspiration and build your own digital wardrobe.</p>
+
+  <div class="card spaced">
+    <h3>Choose your aesthetic</h3>
+    <div class="chip-row" id="style-chips">
+      <button class="chip selected" onclick="chooseStyle('Clean girl',this)">Clean girl</button>
+      <button class="chip" onclick="chooseStyle('Old money',this)">Old money</button>
+      <button class="chip" onclick="chooseStyle('Coquette',this)">Coquette</button>
+      <button class="chip" onclick="chooseStyle('Y2K',this)">Y2K</button>
+      <button class="chip" onclick="chooseStyle('Casual chic',this)">Casual chic</button>
+      <button class="chip" onclick="chooseStyle('Sporty',this)">Sporty</button>
+      <button class="chip" onclick="chooseStyle('Luxury glam',this)">Luxury glam</button>
+    </div>
+    <div class="row">
+      <div class="form-field" style="flex:1">
+        <label for="occasion">Occasion</label>
+        <select id="occasion">
+          <option>Everyday</option><option>School or work</option><option>Brunch</option><option>Date night</option><option>Party</option><option>Cozy day</option>
+        </select>
+      </div>
+      <div class="form-field" style="flex:1">
+        <label for="weather">Weather</label>
+        <select id="weather"><option>Mild</option><option>Hot</option><option>Cold</option><option>Rainy</option></select>
+      </div>
+    </div>
+    <button class="primary" onclick="generateOutfits()">Inspire My Outfit ✨</button>
+  </div>
+
+  <div class="grid three" id="outfit-results"></div>
+
+  <div class="section-head spaced">
+    <div><span class="eyebrow">Your personal closet</span><h2>My Digital Wardrobe</h2></div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div class="form-field" style="flex:1">
+        <label for="wardrobe-name">Clothing item</label>
+        <input id="wardrobe-name" placeholder="e.g. white cardigan">
+      </div>
+      <div class="form-field" style="flex:1">
+        <label for="wardrobe-type">Category</label>
+        <select id="wardrobe-type"><option>Top</option><option>Bottom</option><option>Dress</option><option>Shoes</option><option>Bag</option><option>Accessory</option><option>Outerwear</option></select>
+      </div>
+    </div>
+    <button class="primary" onclick="addWardrobeItem()">Add to My Closet</button>
+    <div class="grid three" id="wardrobe-list"></div>
+  </div>
+</section>
+
+<!-- BESTIE -->
+<section class="page" id="page-bestie">
+  <span class="eyebrow">Your beauty companion</span>
+  <h1>Beauty Bestie 💕</h1>
+  <p class="muted">Explore beauty basics, style ideas, and gentle self-care reminders.</p>
+
+  <div class="card spaced">
+    <h3>What can we help with today?</h3>
+    <div class="chip-row">
+      <button class="chip" onclick="askBestie('Help me create a simple skincare routine')">Skincare routine</button>
+      <button class="chip" onclick="askBestie('Give me outfit inspiration')">Outfit inspiration</button>
+      <button class="chip" onclick="askBestie('Give me a self-care idea')">Self-care ideas</button>
+      <button class="chip" onclick="askBestie('Help me organize my morning')">Morning routine</button>
+      <button class="chip" onclick="askBestie('Give me confidence tips')">Confidence tips</button>
+    </div>
+  </div>
+
+  <div class="chat-window spaced">
+    <div class="chat-messages" id="chat-messages">
+      <div class="bubble bot">Hey girlie! 💗 I'm your Beauty Bestie demo. Pick a topic above or ask for a beauty, fashion, or self-care idea!</div>
+    </div>
+    <form class="chat-form" onsubmit="sendBestie(event)">
+      <input id="chat-input" placeholder="Ask your Beauty Bestie..." autocomplete="off" aria-label="Message">
+      <button class="primary">Send</button>
+    </form>
+    <p class="small">Prototype notice: this is a basic, rule-based demo, not a live AI chatbot. Don't enter private or sensitive information.</p>
+  </div>
+</section>
+
+<!-- PROGRESS -->
+<section class="page" id="page-progress">
+  <span class="eyebrow">Celebrate every little win</span>
+  <h1>My Progress 📈</h1>
+  <p class="muted">Track the habits you choose and celebrate showing up for yourself.</p>
+
+  <div class="grid three">
+    <div class="card"><div class="card-icon">🌷</div><p>Today's completion</p><div class="stat" id="progress-percent">0%</div><div class="progress-track"><div class="progress-fill" id="progress-bar"></div></div></div>
+    <div class="card"><div class="card-icon">✨</div><p>Tasks checked off</p><div class="stat" id="progress-total">0</div><p>Across your saved routines.</p></div>
+    <div class="card"><div class="card-icon">📓</div><p>Journal entries</p><div class="stat" id="progress-journal">0</div><p>Your personal reflections.</p></div>
+  </div>
+
+  <div class="card spaced">
+    <h3>Today's checklist</h3>
+    <p class="muted">Edit your daily goals below.</p>
+    <div id="progress-task-list"></div>
+    <div class="row spaced">
+      <input id="new-task" placeholder="Add a daily goal..." style="flex:1;min-width:140px;border:1px solid var(--border);border-radius:20px;padding:11px">
+      <button class="primary" onclick="addTask()">Add Goal</button>
+    </div>
+  </div>
+
+  <div class="card spaced">
+    <h3>♡ Your wins</h3>
+    <p id="win-message">Every small step counts. Start with one thing today.</p>
+  </div>
+</section>
+
+<!-- CHALLENGES -->
+<section class="page" id="page-challenges">
+  <span class="eyebrow">Little steps, lovely habits</span>
+  <h1>Glow-Up Challenges 🏆</h1>
+  <p class="muted">Choose a challenge that feels manageable. You can participate at your own pace.</p>
+
+  <div class="grid three" id="challenge-list"></div>
+
+  <div class="card spaced">
+    <h3>My current challenge</h3>
+    <p id="active-challenge">Choose any challenge above to get started.</p>
+    <p class="small">Your completion is stored on this device. Challenges are optional, and rest days are okay.</p>
+  </div>
+</section>
+
+<!-- BOUTIQUE -->
+<section class="page" id="page-boutique">
+  <span class="eyebrow">Your beauty shopping space</span>
+  <h1>Beauty Boutique 🛍️</h1>
+  <p class="muted">Explore categories and save products you'd like to research. These are sample ideas, not live listings or verified recommendations.</p>
+
+  <div class="chip-row" id="boutique-filters">
+    <button class="chip selected" onclick="filterBoutique('All',this)">All</button>
+    <button class="chip" onclick="filterBoutique('Skincare',this)">Skincare</button>
+    <button class="chip" onclick="filterBoutique('Makeup',this)">Makeup</button>
+    <button class="chip" onclick="filterBoutique('Haircare',this)">Haircare</button>
+    <button class="chip" onclick="filterBoutique('Fashion',this)">Fashion</button>
+    <button class="chip" onclick="filterBoutique('Self-care',this)">Self-care</button>
+  </div>
+
+  <div class="grid three" id="boutique-list"></div>
+
+  <div class="card spaced">
+    <h3>♡ My Wishlist</h3>
+    <p class="muted">Keep the ideas you want to revisit.</p>
+    <ul class="list" id="wishlist"></ul>
+  </div>
+</section>
+
+<!-- JOURNAL -->
+<section class="page" id="page-journal">
+  <span class="eyebrow">A little space just for you</span>
+  <h1>My Glow-Up Journal 📓</h1>
+  <p class="muted">Write down your goals, reflections, and little victories.</p>
+
+  <div class="card spaced">
+    <div class="form-field">
+      <label for="journal-title">Entry title</label>
+      <input id="journal-title" placeholder="e.g. My Sunday reset">
+    </div>
+    <div class="form-field">
+      <label for="journal-text">What's on your mind?</label>
+      <textarea id="journal-text" placeholder="Today I'm proud of myself because..."></textarea>
+    </div>
+    <button class="primary" onclick="saveJournal()">Save Journal Entry ♡</button>
+    <p class="small">Entries are saved in this browser. Anyone with access to this browser may be able to view them, so avoid sensitive information.</p>
+  </div>
+
+  <div class="section-head spaced">
+    <div><span class="eyebrow">Your memories</span><h2>Past entries</h2></div>
+  </div>
+  <div class="card" id="journal-list"></div>
+</section>
+
+<!-- PROFILE -->
+<section class="page" id="page-profile">
+  <span class="eyebrow">Your personal space</span>
+  <h1>My Profile 👤</h1>
+  <p class="muted">Personalize your experience and manage your preferences.</p>
+
+  <div class="card spaced">
+    <h3>About me</h3>
+    <div class="form-field">
+      <label for="profile-name">What should we call you?</label>
+      <input id="profile-name" placeholder="Your name or nickname">
+    </div>
+    <div class="form-field">
+      <label for="profile-goal">My main glow-up goal</label>
+      <select id="profile-goal">
+        <option>Feel more confident</option>
+        <option>Build a beauty routine</option>
+        <option>Discover my personal style</option>
+        <option>Build healthy habits</option>
+        <option>Explore a complete glow-up</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label for="profile-budget">My preferred budget</label>
+      <select id="profile-budget">
+        <option>Affordable options</option>
+        <option>Under $15</option>
+        <option>$15–$30</option>
+        <option>$31–$60</option>
+        <option>Flexible budget</option>
+      </select>
+    </div>
+    <button class="primary" onclick="saveProfile()">Save My Profile</button>
+  </div>
+
+  <div class="card spaced">
+    <h3>My app preferences</h3>
+    <p class="muted">Your prototype data is stored in local browser storage, not in a secure online account.</p>
+    <button class="secondary" onclick="exportData()">Export My Data</button>
+    <button class="secondary" onclick="resetData()" style="margin:8px 0 0 6px">Reset App Data</button>
+    <p class="small">Export creates a JSON backup file. Reset permanently deletes this prototype's saved data from this browser after confirmation.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">Glow Up <span>AI</span> ✧</div>
+  <p>Your journey. Your pace. Your glow.</p>
+  <p>Prototype edition · Built with love ♡</p>
+</footer>
+
+</main>
+</div>
+
+<div id="toast" class="toast hidden" role="status"></div>
+
+<script>
+"use strict";
+
+const STORAGE_KEY = "glowupai_prototype_v2";
+
+const defaultTasks = [
+  {id:"morning",text:"Complete my morning routine",done:false},
+  {id:"water",text:"Take a mindful hydration break",done:false},
+  {id:"style",text:"Do one little thing for my personal style",done:false},
+  {id:"evening",text:"Make time for an evening reset",done:false}
+];
+
+const defaultRoutines = {
+  morning:[
+    "Gentle cleanse or rinse, depending on your skin's needs",
+    "Moisturizer if needed",
+    "Broad-spectrum sunscreen SPF 30+"
+  ],
+  evening:[
+    "Remove makeup and sunscreen gently",
+    "Cleanse without scrubbing",
+    "Moisturize"
+  ],
+  hair:[
+    "Choose a gentle wash schedule that suits your hair",
+    "Condition lengths as appropriate",
+    "Use a heat protectant when heat styling"
+  ],
+  body:[
+    "Gentle body cleansing",
+    "Moisturize dry areas",
+    "Apply sunscreen to exposed skin during the day"
+  ]
+};
+
+const questions = [
+  {key:"focus",title:"What would you like to focus on?",options:["Skincare and beauty","Makeup","Haircare","Fashion and style","A complete glow-up"]},
+  {key:"goal",title:"What's your main goal?",options:["Build a simple routine","Feel more confident","Discover my aesthetic","Build consistent habits","Find products that suit me"]},
+  {key:"skin",title:"What's your skin type?",options:["Dry","Oily","Combination","Normal","Sensitive","I'm not sure","Skip this question"]},
+  {key:"budget",title:"What's your preferred budget?",options:["Under $15","$15–$30","$31–$60","$61 or more","Affordable options, please"]},
+  {key:"style",title:"Which aesthetic do you love?",options:["Clean girl","Old money","Coquette","Y2K","Casual chic","Sporty","Luxury glam","Still discovering my style"]},
+  {key:"time",title:"How much time do you have daily?",options:["5 minutes","10 minutes","15 minutes","30 minutes or more"]},
+  {key:"priority",title:"What would help you most?",options:["A daily checklist","Beauty tutorials and routines","Outfit inspiration","Motivation and challenges","A little of everything"]}
+];
+
+const challenges = [
+  {id:"routine7",name:"The Routine Reset",icon:"🫧",days:7,desc:"Practice a simple morning or evening routine."},
+  {id:"style5",name:"The Style Explorer",icon:"👗",days:5,desc:"Create an outfit using something you already own."},
+  {id:"journal7",name:"The Reflection Week",icon:"📓",days:7,desc:"Write a short reflection or celebrate a little win."},
+  {id:"kind5",name:"The Self-Kindness Challenge",icon:"🌷",days:5,desc:"Do one kind thing for yourself each day."},
+  {id:"reset3",name:"The Mini Reset",icon:"🕯️",days:3,desc:"Take five minutes to tidy, plan, or rest."},
+  {id:"closet7",name:"The Closet Refresh",icon:"👜",days:7,desc:"Rediscover pieces you already own."}
+];
+
+const products = [
+  {id:"p1",name:"Gentle Cleanser",category:"Skincare",icon:"🫧",desc:"A basic cleansing step to explore.",price:"Varies"},
+  {id:"p2",name:"Daily Sunscreen",category:"Skincare",icon:"☀️",desc:"Look for broad-spectrum SPF 30+.",price:"Varies"},
+  {id:"p3",name:"Moisturizer",category:"Skincare",icon:"🌷",desc:"Explore formulas suited to your skin.",price:"Varies"},
+  {id:"p4",name:"Everyday Lip Gloss",category:"Makeup",icon:"💄",desc:"A simple makeup-bag inspiration pick.",price:"Varies"},
+  {id:"p5",name:"Cream Blush",category:"Makeup",icon:"🌸",desc:"Explore colors and finishes you love.",price:"Varies"},
+  {id:"p6",name:"Hair Mask",category:"Haircare",icon:"🎀",desc:"An occasional conditioning option.",price:"Varies"},
+  {id:"p7",name:"Satin Scrunchies",category:"Haircare",icon:"🩰",desc:"A hair accessory idea.",price:"Varies"},
+  {id:"p8",name:"Wardrobe Basics",category:"Fashion",icon:"👚",desc:"Explore versatile pieces you can rewear.",price:"Varies"},
+  {id:"p9",name:"Everyday Tote",category:"Fashion",icon:"👜",desc:"An accessory for your daily essentials.",price:"Varies"},
+  {id:"p10",name:"Self-Care Journal",category:"Self-care",icon:"📓",desc:"A place for reflections and goals.",price:"Varies"},
+  {id:"p11",name:"Sleep Mask",category:"Self-care",icon:"🌙",desc:"A cozy wind-down accessory.",price:"Varies"},
+  {id:"p12",name:"Beauty Organizer",category:"Self-care",icon:"🪞",desc:"Organize your everyday essentials.",price:"Varies"}
+];
+
+function loadState(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(raw) return {...createDefaultState(),...JSON.parse(raw)};
+  }catch(e){}
+  return createDefaultState();
+}
+
+function createDefaultState(){
+  return {
+    profile:{name:"",goal:"Feel more confident",budget:"Affordable options",style:"Clean girl"},
+    answers:{},
+    tasks:defaultTasks.map(t=>({...t})),
+    routines:JSON.parse(JSON.stringify(defaultRoutines)),
+    ownedProducts:[],
+    wardrobe:[],
+    wishlist:[],
+    journal:[],
+    activeChallenge:"",
+    challengeProgress:{},
+    outfits:[],
+    completedTotal:0
+  };
+}
+
+let state=loadState();
+let quizIndex=0;
+let routineType="morning";
+let boutiqueCategory="All";
+let selectedStyle=state.profile.style||"Clean girl";
+let toastTimer;
+
+function persist(){
+  try{
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
+    return true;
+  }catch(e){
+    notify("Couldn't save. Your browser storage may be full or disabled.");
+    return false;
+  }
+}
+
+function escapeHTML(value){
+  return String(value??"").replace(/[&<>"']/g,ch=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[ch]);
+}
+
+function notify(message){
+  const el=document.getElementById("toast");
+  el.textContent=message;
+  el.classList.remove("hidden");
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>el.classList.add("hidden"),2600);
+}
+
+function navigate(page){
+  document.querySelectorAll(".page").forEach(el=>el.classList.remove("active"));
+  const target=document.getElementById("page-"+page);
+  if(!target) return;
+  target.classList.add("active");
+
+  document.querySelectorAll(".nav-btn").forEach(btn=>{
+    btn.classList.toggle("active",btn.dataset.page===page);
+  });
+
+  if(page==="home") renderHome();
+  if(page==="plan") renderPlan();
+  if(page==="beauty") renderBeauty();
+  if(page==="style") renderWardrobe();
+  if(page==="progress") renderProgress();
+  if(page==="challenges") renderChallenges();
+  if(page==="boutique") renderBoutique();
+  if(page==="journal") renderJournal();
+  if(page==="profile") renderProfile();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function renderHome(){
+  const name=state.profile.name.trim();
+  document.getElementById("welcome-title").textContent=
+    name?`Welcome back, ${name}. ♡`:"Welcome to your glow-up. ♡";
+
+  const done=state.tasks.filter(t=>t.done).length;
+  const total=state.tasks.length;
+  const percent=total?Math.round(done/total*100):0;
+
+  document.getElementById("home-progress").textContent=percent+"%";
+  document.getElementById("home-progress-bar").style.width=percent+"%";
+  document.getElementById("home-tasks").textContent=state.completedTotal;
+  document.getElementById("home-wardrobe").textContent=state.wardrobe.length;
+  document.getElementById("home-favorites").textContent=state.wishlist.length;
+  document.getElementById("task-count").textContent=`${done} of ${total}`;
+
+  document.getElementById("home-task-list").innerHTML=state.tasks.map(t=>`
+    <div class="task ${t.done?"done":""}">
+      <input type="checkbox" id="home-${escapeHTML(t.id)}" ${t.done?"checked":""}
+        onchange="toggleTask('${escapeHTML(t.id)}')">
+      <label for="home-${escapeHTML(t.id)}">${escapeHTML(t.text)}</label>
+    </div>
+  `).join("")||'<p class="empty">Add a goal in My Progress.</p>';
+
+  document.getElementById("daily-quote").textContent=[
+    "You are allowed to grow at your own pace. ♡",
+    "Little habits can make room for lovely changes. 🌷",
+    "Your style is yours to discover. ✨",
+    "Rest is part of taking care of yourself. 🌙"
+  ][new Date().getDate()%4];
+}
+
+function toggleTask(id){
+  const task=state.tasks.find(t=>t.id===id);
+  if(!task)return;
+  task.done=!task.done;
+  if(task.done)state.completedTotal++;
+  persist();
+  renderHome();
+  renderProgress();
+}
+
+function renderPlan(){
+  const a=state.answers;
+  document.getElementById("plan-focus").textContent=a.focus||state.profile.goal;
+  document.getElementById("plan-summary").textContent=
+    `Your current goal is ${a.goal||state.profile.goal}. Start with small, manageable steps that fit your day.`;
+  document.getElementById("plan-aesthetic").textContent=a.style||state.profile.style||"Discovering your style";
+  document.getElementById("plan-budget").textContent="Budget preference: "+(a.budget||state.profile.budget);
+
+  const morning=[
+    "Start with a gentle, manageable morning ritual.",
+    "If you use skincare, consider moisturizer and broad-spectrum sunscreen.",
+    "Choose one small goal for the day."
+  ];
+  const evening=[
+    "Give yourself a moment to slow down.",
+    "Gently remove makeup and sunscreen if worn.",
+    "Prepare one thing that will make tomorrow easier."
+  ];
+
+  if((a.focus||"").includes("Fashion")||(a.style||"").includes("style")){
+    morning.push("Choose an outfit that feels comfortable and like you.");
+  }
+  if(a.time==="5 minutes"){
+    morning.splice(1,1);
+    evening.splice(1,1);
+  }
+
+  document.getElementById("plan-morning").innerHTML=morning.map(x=>`<li>${escapeHTML(x)}</li>`).join("");
+  document.getElementById("plan-evening").innerHTML=evening.map(x=>`<li>${escapeHTML(x)}</li>`).join("");
+  document.getElementById("plan-weekly").textContent=
+    `This week, focus on: ${a.goal||state.profile.goal}. Try one small action a day and adjust the plan to what works for you.`;
+}
+
+function renderQuiz(){
+  const q=questions[quizIndex];
+  document.getElementById("quiz-count").textContent=`Question ${quizIndex+1} of ${questions.length}`;
+  document.getElementById("quiz-progress").style.width=((quizIndex+1)/questions.length*100)+"%";
+  document.getElementById("quiz-question").textContent=q.title;
+  document.getElementById("quiz-options").innerHTML=q.options.map(option=>`
+    <button class="option-btn ${state.answers[q.key]===option?"selected":""}"
+      onclick="selectAnswer('${q.key}','${escapeHTML(option).replace(/'/g,"&#39;")}')">
+      ${escapeHTML(option)}
+    </button>
+  `).join("");
+  document.getElementById("quiz-back").disabled=quizIndex===0;
+  document.getElementById("quiz-next").disabled=!state.answers[q.key];
+  document.getElementById("quiz-next").textContent=
+    quizIndex===questions.length-1?"Create My Plan ✨":"Continue →";
+}
+
+function selectAnswer(key,value){
+  state.answers[key]=value;
+  if(key==="style")state.profile.style=value;
+  persist();
+  renderQuiz();
+}
+
+function quizBack(){
+  if(quizIndex>0){quizIndex--;renderQuiz();}
+}
+
+function quizNext(){
+  const key=questions[quizIndex].key;
+  if(!state.answers[key])return;
+  if(quizIndex<questions.length-1){
+    quizIndex++;
+    renderQuiz();
+  }else{
+    state.profile.goal=state.answers.goal||state.profile.goal;
+    state.profile.budget=state.answers.budget||state.profile.budget;
+    state.profile.style=state.answers.style||state.profile.style;
+    persist();
+    notify("Your starter plan is ready! ♡");
+    navigate("plan");
+  }
+}
+
+function renderBeauty(){
+  const labels={
+    morning:["☀️ My morning routine","A gentle start to your day."],
+    evening:["🌙 My evening routine","Wind down with a few simple steps."],
+    hair:["🎀 My haircare routine","Care for your hair in a way that suits it."],
+    body:["🧴 My body-care routine","Simple body-care ideas for your day."]
+  };
+  document.getElementById("routine-title").textContent=labels[routineType][0];
+  document.getElementById("routine-description").textContent=labels[routineType][1];
+
+  ["morning","evening","hair","body"].forEach(type=>{
+    const tab=document.getElementById("tab-"+type);
+    if(tab)tab.classList.toggle("selected",type===routineType);
+  });
+
+  document.getElementById("routine-items").innerHTML=
+    (state.routines[routineType]||[]).map((item,index)=>`
+      <div class="task">
+        <span>♡</span>
+        <label>${escapeHTML(item)}</label>
+        <button class="chip" onclick="removeRoutineItem(${index})" aria-label="Remove routine step">Remove</button>
+      </div>
+    `).join("")||'<p class="empty">Your routine is empty. Add your first step above.</p>';
+
+  document.getElementById("owned-products").innerHTML=
+    state.ownedProducts.map((p,i)=>`
+      <li>${escapeHTML(p.name)} <span class="badge">${escapeHTML(p.category)}</span>
+      <button class="chip" onclick="removeOwnedProduct(${i})">Remove</button></li>
+    `).join("")||'<li class="muted">Your saved products will appear here.</li>';
+}
+
+function setRoutine(type){
+  routineType=type;
+  renderBeauty();
+}
+
+function addRoutineItem(){
+  const input=document.getElementById("new-routine-item");
+  const value=input.value.trim();
+  if(!value)return notify("Write a routine step first.");
+  state.routines[routineType].push(value);
+  input.value="";
+  persist();
+  renderBeauty();
+  notify("Routine step added ♡");
+}
+
+function removeRoutineItem(index){
+  state.routines[routineType].splice(index,1);
+  persist();
+  renderBeauty();
+}
+
+function addOwnedProduct(){
+  const name=document.getElementById("product-name").value.trim();
+  const category=document.getElementById("product-category").value;
+  if(!name)return notify("Enter a product name first.");
+  state.ownedProducts.push({name,category});
+  document.getElementById("product-name").value="";
+  persist();
+  renderBeauty();
+  notify("Product saved ♡");
+}
+
+function removeOwnedProduct(index){
+  state.ownedProducts.splice(index,1);
+  persist();
+  renderBeauty();
+}
+
+function chooseStyle(style,button){
+  selectedStyle=style;
+  state.profile.style=style;
+  document.querySelectorAll("#style-chips .chip").forEach(b=>b.classList.remove("selected"));
+  if(button)button.classList.add("selected");
+  persist();
+}
+
+function generateOutfits(){
+  const occasion=document.getElementById("occasion").value;
+  const weather=document.getElementById("weather").value;
+  const looks={
+    "Clean girl":[
+      ["🤍","Soft Neutral","A simple fitted top, relaxed trousers, clean sneakers, and minimal accessories."],
+      ["🌷","Everyday Fresh","A soft cardigan, straight-leg jeans, and a small shoulder bag."],
+      ["🕊️","Easy Layers","A basic tee, tailored pants, and understated jewelry."]
+    ],
+    "Old money":[
+      ["🤎","Classic Layers","A knit sweater, tailored trousers, loafers, and a structured bag."],
+      ["🕊️","Quiet Classic","A crisp shirt, neutral skirt or trousers, and delicate accessories."],
+      ["🥐","Polished Casual","A fine-knit top, dark denim, and a timeless jacket."]
+    ],
+    "Coquette":[
+      ["🎀","Soft Romance","A ribbon detail, a cardigan, a flowing skirt, and ballet flats."],
+      ["🌸","Pretty Layers","A delicate blouse, soft colors, and a small shoulder bag."],
+      ["🩰","Sweet Casual","A fitted tee, a pleated skirt, and dainty accessories."]
+    ],
+    "Y2K":[
+      ["🩷","Throwback Cute","A baby tee, relaxed jeans, sneakers, and playful accessories."],
+      ["🦋","Denim Moment","A denim layer, a fitted top, and a small shoulder bag."],
+      ["✨","Playful Mix","A graphic top, wide-leg pants, and statement accessories."]
+    ],
+    "Casual chic":[
+      ["☕","Effortless Chic","A quality basic, straight-leg denim, and a structured bag."],
+      ["🤍","Weekend Edit","A relaxed button-down, comfortable trousers, and clean sneakers."],
+      ["👜","Simple Statement","A monochrome outfit with one interesting accessory."]
+    ],
+    "Sporty":[
+      ["🩶","Athleisure","A comfortable matching set, sneakers, and a lightweight layer."],
+      ["🏃","On the Go","Leggings, an oversized sweatshirt, and a practical bag."],
+      ["☁️","Comfy Layers","Relaxed joggers, a fitted tee, and your favorite sneakers."]
+    ],
+    "Luxury glam":[
+      ["🥂","Evening Polish","A sleek outfit, statement earrings, and an elegant bag."],
+      ["🖤","Modern Glam","A monochrome base, a tailored jacket, and a bold accessory."],
+      ["✨","Elevated Everyday","A refined top, tailored bottoms, and polished shoes."]
+    ]
+  };
+
+  let selected=looks[selectedStyle]||looks["Clean girl"];
+  if(occasion==="Party"||occasion==="Date night"){
+    selected=selected.map((o,i)=>[o[0],["Night-Out Edit","Polished Evening","Statement Look"][i],o[2]+" Consider a dressier shoe or a statement accessory if you enjoy that look."]);
+  }
+  if(weather==="Cold"){
+    selected=selected.map(o=>[o[0],o[1],o[2]+" Add a warm coat and layers."]);
+  }else if(weather==="Rainy"){
+    selected=selected.map(o=>[o[0],o[1],o[2]+" Add a weather-appropriate jacket and shoes with good grip."]);
+  }else if(weather==="Hot"){
+    selected=selected.map(o=>[o[0],o[1],o[2]+" Choose breathable fabrics suitable for warm weather."]);
+  }
+
+  state.outfits=selected.map(o=>({style:selectedStyle,occasion,weather,title:o[1],desc:o[2],icon:o[0]}));
+  persist();
+  document.getElementById("outfit-results").innerHTML=state.outfits.map(o=>`
+    <div class="outfit">
+      <div class="outfit-emoji">${o.icon}</div>
+      <span class="badge">${escapeHTML(o.style)}</span>
+      <h3>${escapeHTML(o.title)}</h3>
+      <p class="muted">${escapeHTML(o.desc)}</p>
+      <button class="secondary spaced" onclick="saveOutfit('${escapeHTML(o.title).replace(/'/g,"&#39;")}')">Save Outfit Idea ♡</button>
+    </div>
+  `).join("");
+  notify("Your outfit inspiration is ready!");
+}
+
+function saveOutfit(title){
+  const outfit=state.outfits.find(o=>o.title===title);
+  if(!outfit)return;
+  state.wishlist.push({id:"outfit-"+Date.now(),name:outfit.title,category:"Outfit idea",desc:outfit.desc});
+  persist();
+  renderWardrobe();
+  notify("Outfit idea saved to your wishlist ♡");
+}
+
+function addWardrobeItem(){
+  const name=document.getElementById("wardrobe-name").value.trim();
+  const type=document.getElementById("wardrobe-type").value;
+  if(!name)return notify("Enter a clothing item first.");
+  state.wardrobe.push({id:"w-"+Date.now(),name,type});
+  document.getElementById("wardrobe-name").value="";
+  persist();
+  renderWardrobe();
+  renderHome();
+  notify("Added to your digital wardrobe!");
+}
+
+function renderWardrobe(){
+  document.getElementById("wardrobe-list").innerHTML=state.wardrobe.map(item=>`
+    <div class="card">
+      <div class="card-icon">${wardrobeEmoji(item.type)}</div>
+      <h3>${escapeHTML(item.name)}</h3>
+      <span class="badge">${escapeHTML(item.type)}</span>
+      <button class="secondary spaced" onclick="removeWardrobe('${escapeHTML(item.id)}')">Remove</button>
+    </div>
+  `).join("")||'<div class="empty">Your closet is waiting for its first piece. ♡</div>';
+
+  document.querySelectorAll("#style-chips .chip").forEach(btn=>{
+    btn.classList.toggle("selected",btn.textContent.trim()===selectedStyle);
+  });
+}
+
+function wardrobeEmoji(type){
+  return ({Top:"👚",Bottom:"👖",Dress:"👗",Shoes:"👟",Bag:"👜",Accessory:"💍",Outerwear:"🧥"})[type]||"👗";
+}
+
+function removeWardrobe(id){
+  state.wardrobe=state.wardrobe.filter(x=>x.id!==id);
+  persist();
+  renderWardrobe();
+  renderHome();
+}
+
+function botReply(text){
+  const t=text.toLowerCase();
+
+  if(t.includes("skin")||t.includes("cleanser")||t.includes("acne")||t.includes("routine")){
+    return "For a simple skincare starting point, consider gentle cleansing, moisturizer if needed, and broad-spectrum SPF 30+ during the day. Introduce new products one at a time, and avoid harsh scrubbing. Skin concerns that persist or cause pain are worth discussing with a qualified healthcare professional. ♡";
+  }
+  if(t.includes("outfit")||t.includes("style")||t.includes("fashion")||t.includes("wear")){
+    return `Let's start with your ${state.profile.style||"personal"} aesthetic! Try building an outfit around one piece you love, then add comfortable basics and an accessory. You can save clothing items in your Style Studio. What you feel good wearing matters most. 🎀`;
+  }
+  if(t.includes("confidence")||t.includes("beautiful")||t.includes("ugly")){
+    return "Girl, your worth isn't measured by your appearance. 💗 Try choosing one thing you appreciate about yourself that has nothing to do with looks, and one small thing that helps you feel comfortable today. You don't need to earn the right to feel good about yourself.";
+  }
+  if(t.includes("hair")){
+    return "A gentle hair routine can start with a wash schedule that suits your scalp, conditioner suited to your hair, and less heat when possible. Hair needs vary, so adjust based on how your hair responds. 🎀";
+  }
+  if(t.includes("self-care")||t.includes("stress")||t.includes("tired")||t.includes("reset")){
+    return "Let's make it gentle: take five minutes to stretch, tidy one tiny area, listen to a song you love, or write down what's on your mind. Rest counts as self-care too. 🌷";
+  }
+  if(t.includes("makeup")){
+    return "For a beginner makeup routine, you could explore moisturizer and sunscreen, optional concealer, blush, mascara, and a lip product. You don't need every product, and you can start with whatever feels comfortable. 💄";
+  }
+  if(t.includes("budget")||t.includes("money")||t.includes("cheap")){
+    return "Let's keep it budget-friendly! Start by using products you already own, make a wishlist before shopping, compare prices, and buy only what fits your budget. A glow-up doesn't require expensive products. ♡";
+  }
+  return "Let's break it into something manageable, girlie. 💗 Tell me whether you'd like help with skincare, makeup, haircare, outfit ideas, daily habits, or self-care. I can share some general starter ideas.";
+}
+
+function addBubble(text,type){
+  const container=document.getElementById("chat-messages");
+  const bubble=document.createElement("div");
+  bubble.className="bubble "+type;
+  bubble.textContent=text;
+  container.appendChild(bubble);
+  container.scrollTop=container.scrollHeight;
+}
+
+function askBestie(text){
+  addBubble(text,"user");
+  setTimeout(()=>addBubble(botReply(text),"bot"),180);
+}
+
+function sendBestie(event){
+  event.preventDefault();
+  const input=document.getElementById("chat-input");
+  const text=input.value.trim();
+  if(!text)return;
+  input.value="";
+  askBestie(text);
+}
+
+function renderProgress(){
+  const done=state.tasks.filter(t=>t.done).length;
+  const total=state.tasks.length;
+  const percent=total?Math.round(done/total*100):0;
+
+  document.getElementById("progress-percent").textContent=percent+"%";
+  document.getElementById("progress-bar").style.width=percent+"%";
+  document.getElementById("progress-total").textContent=state.completedTotal;
+  document.getElementById("progress-journal").textContent=state.journal.length;
+
+  document.getElementById("progress-task-list").innerHTML=state.tasks.map(t=>`
+    <div class="task ${t.done?"done":""}">
+      <input type="checkbox" id="progress-${escapeHTML(t.id)}" ${t.done?"checked":""} onchange="toggleTask('${escapeHTML(t.id)}')">
+      <label for="progress-${escapeHTML(t.id)}">${escapeHTML(t.text)}</label>
+      ${t.id.startsWith("custom-")?`<button class="chip" onclick="removeTask('${escapeHTML(t.id)}')">Remove</button>`:""}
+    </div>
+  `).join("")||'<p class="empty">Add a goal to get started.</p>';
+
+  document.getElementById("win-message").textContent=
+    percent===100&&total>0?"You completed today's checklist! Celebrate your effort. 🎉":
+    done>0?`You've completed ${done} of ${total} goals today. Every step counts. ♡`:
+    "Every small step counts. Start with one thing today.";
+}
+
+function addTask(){
+  const input=document.getElementById("new-task");
+  const text=input.value.trim();
+  if(!text)return notify("Write a goal first.");
+  state.tasks.push({id:"custom-"+Date.now(),text,done:false});
+  input.value="";
+  persist();
+  renderProgress();
+  renderHome();
+  notify("Your new goal has been added!");
+}
+
+function removeTask(id){
+  state.tasks=state.tasks.filter(t=>t.id!==id);
+  persist();
+  renderProgress();
+  renderHome();
+}
+
+function renderChallenges(){
+  document.getElementById("challenge-list").innerHTML=challenges.map(c=>{
+    const progress=state.challengeProgress[c.id]||0;
+    const percent=Math.min(100,Math.round(progress/c.days*100));
+    return `<div class="card">
+      <div class="card-icon">${c.icon}</div>
+      <h3>${escapeHTML(c.name)}</h3>
+      <span class="badge">${c.days} days</span>
+      <p>${escapeHTML(c.desc)}</p>
+      <div class="progress-track"><div class="progress-fill" style="width:${percent}%"></div></div>
+      <p class="small">${Math.min(progress,c.days)} of ${c.days} check-ins</p>
+      <div class="row">
+        <button class="primary" onclick="startChallenge('${c.id}')">${state.activeChallenge===c.id?"Selected":"Choose"}</button>
+        <button class="secondary" onclick="checkChallenge('${c.id}')">Check in +1</button>
+      </div>
+    </div>`;
+  }).join("");
+
+  const active=challenges.find(c=>c.id===state.activeChallenge);
+  document.getElementById("active-challenge").textContent=active?
+    `${active.icon} ${active.name} — ${Math.min(state.challengeProgress[active.id]||0,active.days)} of ${active.days} check-ins completed.`:
+    "Choose any challenge above to get started.";
+}
+
+function startChallenge(id){
+  state.activeChallenge=id;
+  persist();
+  renderChallenges();
+  notify("Your challenge is selected! ♡");
+}
+
+function checkChallenge(id){
+  const challenge=challenges.find(c=>c.id===id);
+  if(!challenge)return;
+  const current=state.challengeProgress[id]||0;
+  if(current>=challenge.days)return notify("You've completed this challenge! Celebrate yourself. 🎉");
+  state.challengeProgress[id]=current+1;
+  state.activeChallenge=id;
+  persist();
+  renderChallenges();
+  notify(state.challengeProgress[id]>=challenge.days?"Challenge complete! Amazing work. 🎉":"Check-in saved! Keep going at your own pace.");
+}
+
+function renderBoutique(){
+  document.getElementById("boutique-list").innerHTML=products.filter(p=>boutiqueCategory==="All"||p.category===boutiqueCategory).map(p=>`
+    <div class="card product">
+      <div class="product-icon">${p.icon}</div>
+      <span class="badge">${escapeHTML(p.category)}</span>
+      <h3>${escapeHTML(p.name)}</h3>
+      <p>${escapeHTML(p.desc)}</p>
+      <div class="price">${escapeHTML(p.price)}</div>
+      <button class="secondary" onclick="toggleWishlist('${p.id}')">
+        ${state.wishlist.some(w=>w.id===p.id)?"♥ Saved":"♡ Save to Wishlist"}
+      </button>
+    </div>
+  `).join("")||'<div class="empty">No items in this category.</div>';
+
+  document.getElementById("wishlist").innerHTML=state.wishlist.map((w,i)=>`
+    <li><strong>${escapeHTML(w.name)}</strong>
+      <span class="badge">${escapeHTML(w.category)}</span>
+      <p class="muted">${escapeHTML(w.desc||"Saved idea")}</p>
+      <button class="chip" onclick="removeWishlist(${i})">Remove</button>
+    </li>
+  `).join("")||'<li class="muted">Your wishlist is empty. Save an idea you love. ♡</li>';
+}
+
+function filterBoutique(category,button){
+  boutiqueCategory=category;
+  document.querySelectorAll("#boutique-filters .chip").forEach(b=>b.classList.remove("selected"));
+  button.classList.add("selected");
+  renderBoutique();
+}
+
+function toggleWishlist(id){
+  const existing=state.wishlist.findIndex(w=>w.id===id);
+  if(existing>=0){
+    state.wishlist.splice(existing,1);
+  }else{
+    const product=products.find(p=>p.id===id);
+    if(product)state.wishlist.push({id:product.id,name:product.name,category:product.category,desc:product.desc});
+  }
+  persist();
+  renderBoutique();
+  renderHome();
+  notify("Wishlist updated ♡");
+}
+
+function removeWishlist(index){
+  state.wishlist.splice(index,1);
+  persist();
+  renderBoutique();
+  renderHome();
+}
+
+function saveJournal(){
+  const title=document.getElementById("journal-title").value.trim();
+  const text=document.getElementById("journal-text").value.trim();
+  if(!title||!text)return notify("Add a title and a reflection first.");
+  state.journal.unshift({id:"j-"+Date.now(),title,text,date:new Date().toLocaleDateString()});
+  document.getElementById("journal-title").value="";
+  document.getElementById("journal-text").value="";
+  persist();
+  renderJournal();
+  renderProgress();
+  notify("Your journal entry was saved ♡");
+}
+
+function renderJournal(){
+  document.getElementById("journal-list").innerHTML=state.journal.map((j,i)=>`
+    <div class="journal-entry">
+      <div class="card-title-row">
+        <h3>${escapeHTML(j.title)}</h3>
+        <span class="small">${escapeHTML(j.date)}</span>
+      </div>
+      <p style="white-space:pre-wrap">${escapeHTML(j.text)}</p>
+      <button class="chip" onclick="deleteJournal(${i})">Delete entry</button>
+    </div>
+  `).join("")||'<div class="empty">Your first journal entry can start with one little win. ♡</div>';
+}
+
+function deleteJournal(index){
+  if(!confirm("Delete this journal entry?"))return;
+  state.journal.splice(index,1);
+  persist();
+  renderJournal();
+  renderProgress();
+}
+
+function renderProfile(){
+  document.getElementById("profile-name").value=state.profile.name||"";
+  document.getElementById("profile-goal").value=state.profile.goal||"Feel more confident";
+  document.getElementById("profile-budget").value=state.profile.budget||"Affordable options";
+}
+
+function saveProfile(){
+  state.profile.name=document.getElementById("profile-name").value.trim();
+  state.profile.goal=document.getElementById("profile-goal").value;
+  state.profile.budget=document.getElementById("profile-budget").value;
+  persist();
+  renderHome();
+  renderPlan();
+  notify("Your profile has been updated! ♡");
+}
+
+function exportData(){
+  const data=JSON.stringify(state,null,2);
+  const blob=new Blob([data],{type:"application/json"});
+  const url=URL.createObjectURL(blob);
+  const link=document.createElement("a");
+  link.href=url;
+  link.download="glow-up-ai-backup.json";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+  notify("Your data export has started.");
+}
+
+function resetData(){
+  if(!confirm("This will delete your saved Glow Up AI prototype data from this browser. Export a backup first if you want to keep it. Continue?"))return;
+  state=createDefaultState();
+  persist();
+  quizIndex=0;
+  boutiqueCategory="All";
+  selectedStyle="Clean girl";
+  renderAll();
+  navigate("home");
+  notify("Your prototype data has been reset.");
+}
+
+function renderAll(){
+  renderHome();
+  renderPlan();
+  renderBeauty();
+  renderWardrobe();
+  renderProgress();
+  renderChallenges();
+  renderBoutique();
+  renderJournal();
+  renderProfile();
+  renderQuiz();
+}
+
+renderAll();
+</script>
+
+</body>
+</html>
